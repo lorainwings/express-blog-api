@@ -73,6 +73,8 @@ export const createArticle = async (req, res, next) => {
   try {
     // 处理请求
     const article = new Article(req.body.article)
+    console.log('---',req.user);
+
     article.author = req.user._id
     (article.populate('author') as any).execPopulate()
     await article.save()

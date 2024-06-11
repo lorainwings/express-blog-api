@@ -2,7 +2,7 @@ import { verify } from '../util/jwt'
 import { jwtSecret } from '../config'
 import { User } from '../model'
 
-module.exports = async (req, res, next) => {
+export default async (req, res, next) => {
   // 从请求头获取 token 数据
   let token = req.headers['authorization']
   token = token
@@ -10,7 +10,9 @@ module.exports = async (req, res, next) => {
     : null
 
   if (!token) {
-    return res.status(401).end()
+    return res.status(401).json({
+      message: '请提供 token 信息'
+    })
   }
 
   try {
@@ -18,7 +20,9 @@ module.exports = async (req, res, next) => {
     req.user = await User.findById(decodedToken.userId)
     next()
   } catch (err) {
-    return res.status(401).end()
+    return res.status(401).json({
+      message: 'token 无效或已过期'
+    })
   }
 
   // 验证 token 是否有效

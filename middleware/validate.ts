@@ -1,4 +1,3 @@
-import type { NextFunction } from 'express'
 import { validationResult, buildCheckFunction } from 'express-validator'
 import { isValidObjectId as isObjectId } from 'mongoose'
 

@@ -1,14 +1,14 @@
-import { body, param } from 'express-validator'
-import validate, { isValidObjectId } from '../middleware/validate'
+import { body } from 'express-validator'
+import { createValidate, isValidObjectId } from '../middleware'
 import { Article } from '../model'
 
-export const createArticle = validate([
+export const createArticle = createValidate([
   body('article.title').notEmpty().withMessage('文章标题不能为空'),
   body('article.description').notEmpty().withMessage('文章摘要不能为空'),
   body('article.body').notEmpty().withMessage('文章内容不能为空')
 ])
 
-export const getArticle = validate([
+export const getArticle = createValidate([
   isValidObjectId(['params'], 'articleId')
   // param('articleId').custom(async value => {
   //   if (!mongoose.isValidObjectId(value)) {
@@ -24,7 +24,7 @@ export const getArticle = validate([
 ])
 
 export const updateArticle = [
-  validate([
+  createValidate([
     isValidObjectId(['params'], 'articleId')
     // param('articleId').isValidObjectId()
   ]),

@@ -31,8 +31,10 @@ export const register = async (req, res, next) => {
     let user = new User(req.body.user)
     await user.save()
 
+    // 将Mongoose模型数据转化为普通的JS数据
     user = user.toJSON()
 
+    // @ts-ignore
     delete user.password
 
     res.status(201).json({

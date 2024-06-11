@@ -1,5 +1,5 @@
 /* middleware: 用于编写中间件 */
 
-export * as auth from './auth'
-export * as validate from './validate'
-export * as errorHandler from './error-handler'
+export { default as authMiddware } from './auth'
+export { default as createValidate, isValidObjectId } from './validate'
+export { default as errorHandlerMiddware } from './error-handler'
