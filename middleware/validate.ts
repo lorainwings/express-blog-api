@@ -2,7 +2,7 @@ import { validationResult, buildCheckFunction } from 'express-validator'
 import { isValidObjectId as isObjectId } from 'mongoose'
 
 
-export default (validations) => {
+export const createValidate = (validations) => {
   return async (req, res, next) => {
     await Promise.all(validations.map(validation => validation.run(req)))
 

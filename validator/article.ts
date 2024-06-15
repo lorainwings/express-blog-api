@@ -1,8 +1,10 @@
 import { body } from 'express-validator'
-import { createValidate, isValidObjectId } from '../middleware'
+import { validateMiddware } from '../middleware'
 import { Article } from '../model'
 
-export const createArticle = createValidate([
+const { createValidate, isValidObjectId } = validateMiddware
+
+export const create = createValidate([
   body('article.title').notEmpty().withMessage('文章标题不能为空'),
   body('article.description').notEmpty().withMessage('文章摘要不能为空'),
   body('article.body').notEmpty().withMessage('文章内容不能为空')
@@ -23,7 +25,7 @@ export const getArticle = createValidate([
   // })
 ])
 
-export const updateArticle = [
+export const update = [
   createValidate([
     isValidObjectId(['params'], 'articleId')
     // param('articleId').isValidObjectId()
@@ -45,4 +47,4 @@ export const updateArticle = [
   }
 ]
 
-export const deleteArticle = updateArticle
+export const deleteArticle = update

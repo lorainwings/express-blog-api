@@ -9,7 +9,7 @@ export const login = async (req, res, next) => {
     // 2. 生成 token
     const user = req.user.toJSON()
     const token = await jwt.sign({
-      userId: user._id
+      userId: user._id // 不需要把所有用户数据拿来签名
     }, jwtSecret, {
       expiresIn: 60 * 60 * 24
     })

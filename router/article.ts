@@ -18,13 +18,13 @@ router.get('/feed', articleCtrl.getFeedArticles)
 router.get('/:articleId', articleValidator.getArticle, articleCtrl.getArticle)
 
 // 创建文章
-router.post('/', authMiddware, articleValidator.createArticle, articleCtrl.createArticle)
+router.post('/', authMiddware.tokenVerify, articleValidator.create, articleCtrl.createArticle)
 
 // 更新文章
-router.put('/:articleId', authMiddware, articleValidator.updateArticle, articleCtrl.updateArticle)
+router.put('/:articleId', authMiddware.tokenVerify, articleValidator.update, articleCtrl.updateArticle)
 
 // 删除文章
-router.delete('/:articleId', authMiddware, articleValidator.deleteArticle, articleCtrl.deleteArticle)
+router.delete('/:articleId', authMiddware.tokenVerify, articleValidator.deleteArticle, articleCtrl.deleteArticle)
 
 // 添加文章评论
 router.post('/:articleId/comments', articleCtrl.createArticleComment)
