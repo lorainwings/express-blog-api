@@ -72,10 +72,8 @@ export const getArticle = async (req, res, next) => {
 export const createArticle = async (req, res, next) => {
   try {
     // 处理请求
-    const article = new Article(req.body.article)
-    console.log('---',req.user);
-
-    article.author = req.user._id
+    const article = new Article(req.body.article);
+    article.author = req.user._id;
     (article.populate('author') as any).execPopulate()
     await article.save()
     res.status(201).json({
