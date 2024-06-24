@@ -74,7 +74,7 @@ export const createArticle = async (req, res, next) => {
     // 处理请求
     const article = new Article(req.body.article);
     article.author = req.user._id;
-    (article.populate('author') as any).execPopulate()
+    await article.populate('author') // 通过author字段将User中的数据映射出来
     await article.save()
     res.status(201).json({
       article

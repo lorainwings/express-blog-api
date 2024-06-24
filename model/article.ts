@@ -26,6 +26,7 @@ const articleSchema = new mongoose.Schema({
   },
   author: {
     type: Schema.Types.ObjectId,
+    // 加上ref后可以使用populate来映射到User模型
     ref: 'User',
     required: true
   }

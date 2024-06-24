@@ -1,4 +1,4 @@
-import { body } from 'express-validator'
+import { body, param } from 'express-validator'
 import { validateMiddware } from '../middleware'
 import { Article } from '../model'
 
@@ -12,16 +12,21 @@ export const createArticle = createValidate([
 
 export const getArticle = createValidate([
   isValidObjectId(['params'], 'articleId')
+
+  /* 此时是验证query参数(/:articleId), 因此只能使用param函数 */
   // param('articleId').custom(async value => {
   //   if (!mongoose.isValidObjectId(value)) {
-  //     // 返回一个失败状态的 Promise
-  //     return Promise.reject('文章ID类型错误')
+  //   返回一个失败状态的 Promise
 
-  //     // 同步：失败
-  //     // throw new Error('文章ID类型错误')
-  //   }
-  //   // 同步：成功
-  //   // return true
+  /*   异步错误情况, 返回reject */
+  //   return Promise.reject('文章ID类型错误')
+
+  /*   同步失败情况: 返回一个错误 */
+  //   throw new Error('文章ID类型错误')
+  // }
+
+  /*    同步成功情况：返回boolean值true */
+  //    return true
   // })
 ])
 
