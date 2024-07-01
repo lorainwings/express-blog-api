@@ -10,22 +10,22 @@ export const createArticle = createValidate([
   body('article.body').notEmpty().withMessage('文章内容不能为空')
 ])
 
-export const getArticle = createValidate([
+export const getArticleById = createValidate([
+  /* 为了通用, 使用自定义检查函数buildCheckFunction */
   isValidObjectId(['params'], 'articleId')
 
   /* 此时是验证query参数(/:articleId), 因此只能使用param函数 */
   // param('articleId').custom(async value => {
   //   if (!mongoose.isValidObjectId(value)) {
-  //   返回一个失败状态的 Promise
 
-  /*   异步错误情况, 返回reject */
+  // /*   异步错误情况, 返回一个失败状态的 Promise, reject */
   //   return Promise.reject('文章ID类型错误')
 
-  /*   同步失败情况: 返回一个错误 */
+  // /*   同步失败情况: 返回一个错误 */
   //   throw new Error('文章ID类型错误')
   // }
 
-  /*    同步成功情况：返回boolean值true */
+  // /*    同步成功情况：返回boolean值true */
   //    return true
   // })
 ])

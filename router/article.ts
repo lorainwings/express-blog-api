@@ -14,8 +14,8 @@ router.get('/', articleCtrl.getArticles)
 // 获取用户关注的作者文章列表
 router.get('/feed', articleCtrl.getFeedArticles)
 
-// 获取文章
-router.get('/:articleId', articleValidator.getArticle, articleCtrl.getArticle)
+// 通过ID获取文章
+router.get('/:articleId', articleValidator.getArticleById, articleCtrl.getArticleById)
 
 // 创建文章
 router.post('/', authMiddware.tokenVerify, articleValidator.createArticle, articleCtrl.createArticle)

@@ -10,6 +10,7 @@ export const getArticles = async (req, res, next) => {
       author
     } = req.query
 
+    // 查询条件
     const filter: any = {}
 
     if (tag) {
@@ -54,7 +55,7 @@ export const getFeedArticles = async (req, res, next) => {
 }
 
 // 获取文章
-export const getArticle = async (req, res, next) => {
+export const getArticleById = async (req, res, next) => {
   try {
     const article = await Article.findById(req.params.articleId).populate('author')
     if (!article) {

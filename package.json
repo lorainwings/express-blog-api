@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch app.ts",
+    "dev": "bun run --hot app.ts",
     "build:dev": "tsc --build --sourceMap && node --inspect=9229 dist/app.js",
     "debug": "nodemon --ext ts --exec 'pnpm build:dev'",
     "build:prod": "rm -rf dist && tsc --build"

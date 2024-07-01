@@ -15,8 +15,10 @@ export const createValidate = (validations) => {
   }
 }
 
-export const isValidObjectId = (location, fields) => {
-  return buildCheckFunction(location)(fields).custom(async value => {
+export const isValidObjectId = (place, fields) => {
+  // 使用自定义检查函数buildCheckFunction
+  // buildCheckFunction第一个参数是需要校验哪个位置的数据, 可以是body, query...
+  return buildCheckFunction(place)(fields).custom(async value => {
     if (!isObjectId(value)) {
       return Promise.reject('ID 不是一个有效的 ObjectID')
     }
