@@ -5,8 +5,17 @@ import userRouter from "./user"
 import profileRouter from "./profile"
 import articleRouter from "./article"
 import tagRouter from "./tag"
+import session from "express-session"
+import { sessionSecret } from "../config"
 
 const router = express.Router()
+
+router.use(session({
+  secret: sessionSecret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 10000/* , secure: true */ }
+}))
 
 // 用户相关路由
 router.use(userRouter)

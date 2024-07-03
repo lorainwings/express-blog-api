@@ -95,3 +95,45 @@ export const unfollowUser = async (req, res, next) => {
     next(err)
   }
 }
+
+
+// 用户注册(通过cookie)
+export const registerByCookie = async (req, res, next) => {
+  try {
+    let user = new User(req.body.user)
+    await user.save()
+
+    // 保持登录状态
+    req.session.user = user
+
+    // 将Mongoose模型数据转化为普通的JS数据
+    user = user.toJSON()
+
+    // @ts-ignore
+    delete user.password
+
+    res.status(201).json({
+      user
+    })
+  } catch (err) {
+    next(err)
+  }
+}
+
+// 用户登录(通过cookie)
+export const loginByCookie = async (req, res, next) => {
+  try {
+    const user = req.user.toJSON()
+
+    // 保持登录状态
+    req.session.user = user
+
+    delete user.password
+
+    res.status(200).json({
+      ...user
+    })
+  } catch (err) {
+    next(err)
+  }
+}
