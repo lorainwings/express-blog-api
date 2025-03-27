@@ -8,7 +8,7 @@
     "dev": "bun run --hot app.ts",
     "build:dev": "tsc --build --sourceMap && node --inspect=9229 dist/app.js",
     "debug": "nodemon --ext ts --exec 'pnpm build:dev'",
-    "build:prod": "rm -rf dist && tsc --build"
+    "build": "tsc --build"
   },
   "keywords": [],
   "author": "",
